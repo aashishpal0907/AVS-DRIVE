@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>AVS DRIVE - Car Rental Service</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+color:#111;
+}
+
+/* NAVBAR */
+
+nav{
+width:100%;
+background:#0d1b2a;
+padding:18px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+color:#fff;
+font-size:28px;
+font-weight:700;
+}
+
+.logo span{
+color:#00b4d8;
+}
+
+nav ul{
+display:flex;
+gap:30px;
+list-style:none;
+}
+
+nav ul li a{
+text-decoration:none;
+color:#fff;
+font-size:15px;
+transition:0.3s;
+}
+
+nav ul li a:hover{
+color:#00b4d8;
+}
+
+.book-btn{
+background:#00b4d8;
+color:#fff;
+padding:12px 24px;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+}
+
+/* HERO SECTION */
+
+.hero{
+width:100%;
+min-height:90vh;
+background:
+linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1600&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+padding:0 7%;
+}
+
+.hero-content{
+max-width:650px;
+}
+
+.hero h1{
+color:#fff;
+font-size:65px;
+line-height:78px;
+margin-bottom:20px;
+}
+
+.hero p{
+color:#ddd;
+font-size:18px;
+line-height:30px;
+margin-bottom:35px;
+}
+
+.hero-buttons{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.hero-buttons a{
+text-decoration:none;
+padding:15px 28px;
+border-radius:10px;
+font-weight:600;
+}
+
+.btn1{
+background:#00b4d8;
+color:#fff;
+}
+
+.btn2{
+border:2px solid #fff;
+color:#fff;
+}
+
+/* SECTION */
+
+section{
+padding:90px 7%;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:60px;
+}
+
+.section-title h2{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.section-title p{
+color:#666;
+}
+
+/* CARS */
+
+.car-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.car-card{
+background:#fff;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.car-card:hover{
+transform:translateY(-8px);
+}
+
+.car-card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.car-info{
+padding:25px;
+}
+
+.car-info h3{
+margin-bottom:10px;
+font-size:24px;
+}
+
+.price{
+color:#00b4d8;
+font-size:20px;
+font-weight:700;
+margin-bottom:20px;
+}
+
+.car-info button{
+width:100%;
+border:none;
+background:#0d1b2a;
+color:#fff;
+padding:14px;
+border-radius:10px;
+cursor:pointer;
+font-size:15px;
+}
+
+/* ABOUT */
+
+.about{
+background:#fff;
+}
+
+.about-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:50px;
+align-items:center;
+}
+
+.about img{
+width:100%;
+border-radius:20px;
+}
+
+.about-text h2{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.about-text p{
+line-height:30px;
+color:#555;
+margin-bottom:25px;
+}
+
+.features{
+display:grid;
+gap:15px;
+}
+
+.features div{
+background:#f1f5f9;
+padding:15px;
+border-radius:10px;
+font-weight:500;
+}
+
+/* CONTACT */
+
+.contact{
+background:#0d1b2a;
+color:#fff;
+}
+
+.contact-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:50px;
+}
+
+.contact-info h3{
+font-size:30px;
+margin-bottom:25px;
+}
+
+.contact-info p{
+margin-bottom:18px;
+color:#ddd;
+line-height:28px;
+}
+
+form{
+background:#fff;
+padding:35px;
+border-radius:18px;
+}
+
+form input,
+form textarea{
+width:100%;
+padding:15px;
+margin-bottom:18px;
+border:1px solid #ddd;
+border-radius:10px;
+outline:none;
+}
+
+form button{
+width:100%;
+padding:15px;
+border:none;
+background:#00b4d8;
+color:#fff;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+font-weight:600;
+}
+
+/* FOOTER */
+
+footer{
+background:#06111d;
+color:#aaa;
+text-align:center;
+padding:25px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:45px;
+line-height:58px;
+}
+
+nav{
+flex-direction:column;
+gap:20px;
+}
+
+nav ul{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+AVS <span>DRIVE</span>
+</div>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#cars">Cars</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+<a href="https://wa.me/919717490134" class="book-btn">
+Book Now
+</a>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>Premium Car Rental Service In Ghaziabad</h1>
+
+<p>
+Affordable, Reliable and Comfortable Cars For Daily Rental,
+Outstation Trips and Family Travel.
+Starting From ₹1500/Day.
+</p>
+
+<div class="hero-buttons">
+
+<a href="https://wa.me/919717490134" class="btn1">
+Book On WhatsApp
+</a>
+
+<a href="#cars" class="btn2">
+Explore Cars
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CARS -->
+
+<section id="cars">
+
+<div class="section-title">
+<h2>Our Cars</h2>
+<p>Choose Your Perfect Ride</p>
+</div>
+
+<div class="car-grid">
+
+<div class="car-card">
+
+<img src="https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Swift/10402/1688128138547/exterior-image-166.jpg">
+
+<div class="car-info">
+<h3>Maruti Swift</h3>
+<div class="price">₹1500 / Day</div>
+
+<button onclick="openBooking('Maruti Swift')">
+Book Now
+</button>
+</div>
+</div>
+
+<div class="car-card">
+
+<img src="https://imgd.aeplcdn.com/1920x1080/n/cw/ec/136183/grand-i10-nios-exterior-left-front-three-quarter.jpeg?isig=0&q=80&q=80">
+
+<div class="car-info">
+<h3>Grand i10</h3>
+<div class="price">₹2500 / Day</div>
+
+<button onclick="openBooking('Grand i10')">
+Book Now
+</button>
+
+</div>
+</div>
+
+<div class="car-card">
+
+<img src="https://carfinderassets.s3.ap-south-1.amazonaws.com/carFinder/cars/1775295711763-car-thumbnail.webp">
+
+<div class="car-info">
+<h3>XUV 700</h3>
+<div class="price">₹4200 / Day</div>
+
+<button onclick="openBooking('XUV 700')">
+Book Now
+</button>
+
+</div>
+</div>
+
+</div>
+
+</section>
+<!-- ALL CARS BUTTON -->
+
+<div class="all-cars-btn">
+
+<a href="cars.html">
+View All Cars
+</a>
+
+</div>
+
+<style>
+
+.all-cars-btn{
+    width:100%;
+    text-align:center;
+    margin-top:50px;
+}
+
+.all-cars-btn a{
+    text-decoration:none;
+    background:#00b4d8;
+    color:#fff;
+    padding:16px 35px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
+    transition:0.3s;
+    display:inline-block;
+}
+
+.all-cars-btn a:hover{
+    background:#0096c7;
+    transform:translateY(-3px);
+}
+
+</style>
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+<div class="about-container">
+
+<img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop">
+
+<div class="about-text">
+
+<h2>About AVS DRIVE</h2>
+
+<p>
+AVS DRIVE provides trusted and affordable self-drive and rental car services in Ghaziabad.
+We focus on customer comfort, clean vehicles and easy booking experience.
+</p>
+
+<div class="features">
+
+<div>✔ Affordable Daily Rental</div>
+<div>✔ Well Maintained Cars</div>
+<div>✔ Easy WhatsApp Booking</div>
+<div>✔ 24/7 Customer Support</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+<div class="section-title">
+<h2 style="color:white;">Contact Us</h2>
+<p style="color:#ccc;">Get In Touch With AVS DRIVE</p>
+</div>
+
+<div class="contact-container">
+
+<div class="contact-info">
+
+<h3>Contact Information</h3>
+
+<p>
+📍 Shop no 44, Patel Nagar 2nd, Ghaziabad,
+Near Shaheed Sthal Metro Station
+</p>
+
+<p>
+📞 +91 9717490134
+</p>
+
+<p>
+📷 Instagram: AVS_DRIVES
+</p>
+
+</div>
+<form id="contactForm">
+
+<input
+type="text"
+id="contactName"
+placeholder="Your Name"
+required
+>
+
+<input
+type="tel"
+id="contactMobile"
+placeholder="Mobile Number"
+required
+>
+
+<textarea
+id="contactQuery"
+rows="5"
+placeholder="Your Query"
+required
+></textarea>
+
+<button type="submit">
+Submit Query
+</button>
+
+</form>
+
+<script>
+
+document.getElementById("contactForm")
+.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let name =
+document.getElementById("contactName").value;
+
+let mobile =
+document.getElementById("contactMobile").value;
+
+let query =
+document.getElementById("contactQuery").value;
+
+let message =
+"📩 NEW CUSTOMER QUERY\n\n" +
+"👤 Name: " + name + "\n\n" +
+"📞 Mobile: " + mobile + "\n\n" +
+"📝 Query: " + query;
+
+let whatsappNumber =
+"919717490134";
+
+let url =
+"https://wa.me/" +
+whatsappNumber +
+"?text=" +
+encodeURIComponent(message);
+
+window.open(url, "_blank");
+
+});
+
+</script>
+<script>
+
+function openBooking(carName){
+
+localStorage.setItem("selectedCar", carName);
+
+window.location.href = "booking.html";
+
+}
+
+</script>
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+© 2026 AVS DRIVE | All Rights Reserved
+
+</footer>
+
+
+
+</body>
+</html>

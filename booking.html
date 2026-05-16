@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Book Your Car - AVS DRIVE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+}
+
+/* NAVBAR */
+
+nav{
+width:100%;
+background:#0d1b2a;
+padding:18px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+color:#fff;
+font-size:28px;
+font-weight:700;
+}
+
+.logo span{
+color:#00b4d8;
+}
+
+.back-btn{
+text-decoration:none;
+background:#00b4d8;
+color:#fff;
+padding:12px 24px;
+border-radius:10px;
+font-weight:600;
+}
+
+/* BOOKING SECTION */
+
+.booking-section{
+padding:80px 7%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.booking-box{
+width:100%;
+max-width:750px;
+background:#fff;
+padding:45px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.booking-box h1{
+text-align:center;
+font-size:42px;
+margin-bottom:10px;
+color:#0d1b2a;
+}
+
+.booking-box p{
+text-align:center;
+color:#666;
+margin-bottom:35px;
+}
+
+/* FORM */
+
+.booking-form{
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea{
+width:100%;
+padding:16px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:15px;
+outline:none;
+}
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus{
+border-color:#00b4d8;
+}
+
+.booking-form button{
+padding:16px;
+border:none;
+background:#00b4d8;
+color:#fff;
+font-size:16px;
+border-radius:12px;
+cursor:pointer;
+font-weight:600;
+transition:0.3s;
+}
+
+.booking-form button:hover{
+background:#0096c7;
+}
+
+/* FOOTER */
+
+footer{
+background:#06111d;
+color:#aaa;
+text-align:center;
+padding:25px;
+margin-top:40px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.booking-box{
+padding:25px;
+}
+
+.booking-box h1{
+font-size:34px;
+}
+
+nav{
+flex-direction:column;
+gap:20px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+AVS <span>DRIVE</span>
+</div>
+
+<a href="index.html" class="back-btn">
+Back To Home
+</a>
+
+</nav>
+
+<!-- BOOKING -->
+
+<section class="booking-section">
+
+<div class="booking-box">
+
+<h1>Book Your Car</h1>
+
+<p>
+Fill Your Details & Confirm Booking On WhatsApp
+</p>
+
+<form class="booking-form" id="bookingForm">
+
+<!-- CUSTOMER NAME -->
+
+<input
+type="text"
+id="name"
+placeholder="Enter Your Name"
+required
+>
+
+<!-- MOBILE -->
+
+<input
+type="tel"
+id="mobile"
+placeholder="Enter Mobile Number"
+required
+>
+
+<!-- CAR SELECT -->
+
+<select id="carSelect" required>
+
+<option value="">Select Your Car</option>
+
+<option>Maruti Swift</option>
+<option>Hyundai Creta</option>
+<option>Mahindra Scorpio</option>
+<option>Tata Nexon</option>
+<option>Kia Seltos</option>
+<option>Hyundai i20</option>
+<option>Maruti Baleno</option>
+<option>Toyota Fortuner</option>
+<option>Mahindra Thar</option>
+<option>Maruti Brezza</option>
+<option>Hyundai Venue</option>
+<option>Kia Sonet</option>
+<option>Tata Punch</option>
+<option>Renault Kwid</option>
+<option>Maruti WagonR</option>
+<option>Hyundai Verna</option>
+<option>Honda City</option>
+<option>Toyota Innova</option>
+<option>Mahindra XUV700</option>
+<option>Tata Harrier</option>
+
+</select>
+
+<!-- PICKUP DATE -->
+
+<input
+type="date"
+id="pickupDate"
+required
+>
+
+<!-- DROP DATE -->
+
+<input
+type="date"
+id="dropDate"
+required
+>
+
+<!-- PLACE -->
+
+<textarea
+id="place"
+rows="4"
+placeholder="Enter Pickup / Drop Location"
+required
+></textarea>
+
+<!-- SUBMIT -->
+
+<button type="submit">
+Confirm Booking
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+© 2026 AVS DRIVE | All Rights Reserved
+
+</footer>
+
+<script>
+
+document.getElementById("bookingForm")
+.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let name =
+document.getElementById("name").value;
+
+let mobile =
+document.getElementById("mobile").value;
+
+let car =
+document.getElementById("carSelect").value;
+
+let pickupDate =
+document.getElementById("pickupDate").value;
+
+let dropDate =
+document.getElementById("dropDate").value;
+
+let place =
+document.getElementById("place").value;
+
+let message = 
+"🚗 NEW CAR BOOKING REQUEST\n\n" +
+"👤 Name: " + name + "\n\n" +
+"📞 Mobile: " + mobile + "\n\n" +
+"🚘 Car: " + car + "\n\n" +
+"📅 Pickup Date: " + pickupDate + "\n\n" +
+"📅 Drop Date: " + dropDate + "\n\n" +
+"📍 Location: " + place;
+
+let whatsappNumber = "919717490134";
+
+let url =
+"https://wa.me/" +
+whatsappNumber +
+"?text=" +
+encodeURIComponent(message);
+
+window.open(url, "_blank");
+
+});
+
+</script>
+</body>
+</html>
