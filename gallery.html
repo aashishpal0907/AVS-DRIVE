@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AVS DRIVE Gallery</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#060b16;
+color:white;
+overflow-x:hidden;
+}
+
+/* HERO SECTION */
+
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+
+background:
+linear-gradient(rgba(0,0,0,0.65),
+rgba(0,0,0,0.80)),
+url('images/bg.jpg');
+
+background-size:cover;
+background-position:center;
+}
+
+.hero-content h1{
+font-size:60px;
+font-weight:700;
+margin-bottom:20px;
+}
+
+.hero-content p{
+font-size:18px;
+max-width:700px;
+line-height:1.8;
+color:#d6d6d6;
+}
+
+/* MOVING CAR SECTION */
+
+.car-section{
+height:250vh;
+position:relative;
+}
+
+.car-box{
+position:sticky;
+top:120px;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.car-box img{
+width:80%;
+max-width:900px;
+transition:0.2s linear;
+}
+
+/* DETAILS */
+
+.details{
+padding:100px 10%;
+background:#0d1323;
+}
+
+.details h2{
+font-size:42px;
+margin-bottom:25px;
+}
+
+.details p{
+font-size:18px;
+line-height:2;
+color:#cfcfcf;
+margin-bottom:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>AVS DRIVE</h1>
+
+<p>
+Premium self-drive cars for every journey.
+Luxury feel, smooth rides and unforgettable experience in Ghaziabad.
+</p>
+
+</div>
+
+</section>
+
+<!-- MOVING CAR -->
+
+<section class="car-section">
+
+<div class="car-box">
+
+<img src="images/car.png" id="car">
+
+</div>
+
+</section>
+
+<!-- DETAILS -->
+
+<section class="details">
+
+<h2>Premium Experience</h2>
+
+<p>
+At AVS DRIVE, we provide premium self-drive cars with comfort, safety and luxury feel. From hatchbacks to SUVs, every ride is maintained for the best driving experience.
+</p>
+
+<p>
+Easy booking, affordable pricing and stylish cars make every trip memorable. Whether it's a family tour, weekend trip or business ride — AVS DRIVE is ready for you.
+</p>
+
+</section>
+
+<script>
+
+window.addEventListener("scroll", ()=>{
+
+const scroll = window.scrollY;
+
+const car = document.getElementById("car");
+
+car.style.transform =
+translateX(${scroll * 0.3}px);
+
+});
+
+</script>
+
+</body>
+
+</html>
