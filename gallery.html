@@ -1,15 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AVS DRIVE Gallery</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -21,82 +21,205 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-background:#060b16;
+background:#050816;
 color:white;
 overflow-x:hidden;
 }
 
-/* HERO SECTION */
+/* NAVBAR */
+
+nav{
+width:100%;
+padding:20px 8%;
+background:#020817;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+position:fixed;
+top:0;
+left:0;
+
+z-index:999;
+}
+
+.logo{
+font-size:32px;
+font-weight:700;
+}
+
+.logo span{
+color:#00bfff;
+}
+
+nav a{
+text-decoration:none;
+background:#00bfff;
+color:white;
+
+padding:12px 24px;
+border-radius:10px;
+
+font-weight:600;
+}
+
+/* HERO */
 
 .hero{
 height:100vh;
+
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 text-align:center;
+
 padding:20px;
 
 background:
-linear-gradient(rgba(0,0,0,0.65),
+linear-gradient(rgba(0,0,0,0.70),
 rgba(0,0,0,0.80)),
 url('bg.jpg');
 
 background-size:cover;
 background-position:center;
+background-repeat:no-repeat;
 }
 
-.hero-content h1{
-font-size:60px;
-font-weight:700;
+.hero-content{
+max-width:850px;
+
+background:rgba(255,255,255,0.08);
+
+backdrop-filter:blur(15px);
+-webkit-backdrop-filter:blur(15px);
+
+padding:50px;
+border-radius:25px;
+
+border:1px solid rgba(255,255,255,0.1);
+
+box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+
+.hero h1{
+font-size:70px;
 margin-bottom:20px;
 }
 
-.hero-content p{
-font-size:18px;
-max-width:700px;
-line-height:1.8;
-color:#d6d6d6;
+.hero h1 span{
+color:#00bfff;
 }
 
-/* MOVING CAR SECTION */
+.hero p{
+font-size:20px;
+line-height:2;
+color:#d9d9d9;
+}
 
-.car-section{
-height:250vh;
+/* SCROLL CAR SECTION */
+
+.scroll-section{
+height:300vh;
 position:relative;
 }
 
-.car-box{
+.car-wrapper{
+
 position:sticky;
 top:120px;
-display:flex;
-justify-content:center;
-align-items:center;
+
 height:100vh;
+
+display:flex;
+justify-content:flex-start;
+align-items:center;
+
+overflow:hidden;
 }
 
-.car-box img{
-width:80%;
-max-width:900px;
-transition:0.2s linear;
+.car-wrapper img{
+
+width:850px;
+
+position:absolute;
+left:-850px;
+
+filter:
+drop-shadow(0 0 40px rgba(0,191,255,0.4));
+
 }
 
 /* DETAILS */
 
 .details{
-padding:100px 10%;
-background:#0d1323;
+
+padding:120px 10%;
+
+background:#0b1220;
 }
 
 .details h2{
-font-size:42px;
-margin-bottom:25px;
+
+font-size:50px;
+
+margin-bottom:30px;
+
+color:#00bfff;
 }
 
 .details p{
-font-size:18px;
-line-height:2;
-color:#cfcfcf;
-margin-bottom:20px;
+
+font-size:19px;
+
+line-height:2.1;
+
+margin-bottom:30px;
+
+color:#d2d2d2;
+}
+
+/* FOOTER */
+
+footer{
+
+padding:30px;
+text-align:center;
+
+background:#020817;
+
+color:#bdbdbd;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:42px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+.hero-content{
+padding:30px;
+}
+
+.car-wrapper img{
+width:420px;
+left:-420px;
+}
+
+.details h2{
+font-size:34px;
+}
+
+.details p{
+font-size:16px;
+}
+
 }
 
 </style>
@@ -105,17 +228,35 @@ margin-bottom:20px;
 
 <body>
 
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+AVS <span>DRIVE</span>
+</div>
+
+<a href="index.html">
+Back To Home
+</a>
+
+</nav>
+
 <!-- HERO -->
 
 <section class="hero">
 
 <div class="hero-content">
 
-<h1>AVS DRIVE</h1>
+<h1>
+AVS <span>DRIVE</span>
+</h1>
 
 <p>
-Premium self-drive cars for every journey.
-Luxury feel, smooth rides and unforgettable experience in Ghaziabad.
+
+Premium self-drive cars crafted for comfort, style and unforgettable journeys.
+Experience luxury rides with powerful performance and affordable pricing in Ghaziabad.
+
 </p>
 
 </div>
@@ -124,9 +265,9 @@ Luxury feel, smooth rides and unforgettable experience in Ghaziabad.
 
 <!-- MOVING CAR -->
 
-<section class="car-section">
+<section class="scroll-section">
 
-<div class="car-box">
+<div class="car-wrapper">
 
 <img src="car.png" id="car">
 
@@ -138,28 +279,51 @@ Luxury feel, smooth rides and unforgettable experience in Ghaziabad.
 
 <section class="details">
 
-<h2>Premium Experience</h2>
+<h2>
+Drive Premium
+</h2>
 
 <p>
-At AVS DRIVE, we provide premium self-drive cars with comfort, safety and luxury feel. From hatchbacks to SUVs, every ride is maintained for the best driving experience.
+
+AVS DRIVE provides premium self-drive cars with luxury comfort, stylish interiors and smooth driving experience.
+Whether you need a car for weekend trips, family tours, business travel or daily rides — we offer the perfect car for every journey.
+
 </p>
 
 <p>
-Easy booking, affordable pricing and stylish cars make every trip memorable. Whether it's a family tour, weekend trip or business ride — AVS DRIVE is ready for you.
+
+Our collection includes hatchbacks, SUVs, sedans and luxury vehicles with affordable pricing and easy booking process.
+We focus on safety, cleanliness and customer satisfaction to give you the best rental experience.
+
+</p>
+
+<p>
+
+Book your favorite car anytime and enjoy a smooth premium ride with AVS DRIVE.
+
 </p>
 
 </section>
 
+<!-- FOOTER -->
+
+<footer>
+
+© 2026 AVS DRIVE | All Rights Reserved
+
+</footer>
+
 <script>
 
-window.addEventListener("scroll", ()=>{
+window.addEventListener("scroll", function(){
 
-const scroll = window.scrollY;
+let scroll = window.scrollY;
 
-const car = document.getElementById("car");
+let car = document.getElementById("car");
 
-car.style.transform =
-translateX(${scroll * 0.3}px);
+let move = scroll * 1.2;
+
+car.style.left = (-850 + move) + "px";
 
 });
 
