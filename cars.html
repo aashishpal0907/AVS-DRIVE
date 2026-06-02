@@ -1,546 +1,1490 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Cars - AVS DRIVE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #00b4d8;
+            --primary-hover: #0096c7;
+            --bg-dark: #050816;
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-muted: #aaa;
+        }
 
-<title>All Cars - AVS DRIVE</title>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        body {
+            background: linear-gradient(rgba(5, 8, 22, 0.85), rgba(5, 8, 22, 0.92)), url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-<style>
+        /* GLOBALS */
+        .btn-premium {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 26px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.25);
+            display: inline-block;
+            text-align: center;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+        .btn-premium:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 180, 216, 0.45);
+        }
 
-body{
-background:#f5f7fb;
-}
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+        }
 
-/* NAVBAR */
+        section {
+            padding: 40px 7% 80px;
+        }
 
-nav{
-width:100%;
-background:#0d1b2a;
-padding:18px 7%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-z-index:1000;
-}
+        .hero {
+            padding: 70px 7% 20px;
+            text-align: center;
+        }
 
-.logo{
-color:#fff;
-font-size:28px;
-font-weight:700;
-}
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
 
-.logo span{
-color:#00b4d8;
-}
+        .hero h1 span {
+            color: var(--primary);
+        }
 
-nav ul{
-display:flex;
-gap:30px;
-list-style:none;
-}
+        .hero p {
+            color: #ddd;
+            font-size: 17px;
+        }
 
-nav ul li a{
-text-decoration:none;
-color:#fff;
-transition:0.3s;
-}
+        /* NAVBAR */
+        nav {
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 8, 22, 0.65);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+        }
 
-nav ul li a:hover{
-color:#00b4d8;
-}
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+        }
 
-.book-btn{
-background:#00b4d8;
-color:#fff;
-padding:12px 24px;
-border-radius:10px;
-text-decoration:none;
-font-weight:600;
-}
+        .logo span {
+            color: var(--primary);
+        }
 
-/* HERO */
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
 
-.hero{
-padding:70px 7% 40px;
-text-align:center;
-}
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
 
-.hero h1{
-font-size:52px;
-color:#0d1b2a;
-margin-bottom:15px;
-}
+        nav ul li a:hover {
+            color: var(--primary);
+        }
 
-.hero p{
-color:#666;
-font-size:17px;
-}
+        /* SEARCH BAR SECTION */
+        .search-section {
+            padding: 0 7% 40px;
+            display: flex;
+            justify-content: center;
+        }
 
-/* SEARCH */
+        .search-box-wrapper {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+        }
 
-.search-section{
-padding:0 7% 50px;
-display:flex;
-justify-content:center;
-}
+        .search-box-wrapper i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 18px;
+        }
 
-.search-box{
-width:100%;
-max-width:700px;
-position:relative;
-}
+        .search-box-wrapper input {
+            width: 100%;
+            padding: 16px 20px 16px 55px;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
 
-.search-box input{
-width:100%;
-padding:18px 22px;
-border:none;
-border-radius:14px;
-font-size:16px;
-outline:none;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
+        .search-box-wrapper input:focus {
+            border-color: var(--primary);
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.25);
+        }
 
-/* CAR GRID */
+        /* CAR GRID */
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 35px;
+        }
 
-.car-section{
-padding:0 7% 80px;
-}
+        .car-card {
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
 
-.car-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
-}
+        .car-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 180, 216, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 180, 216, 0.15);
+        }
 
-.car-card{
-background:#fff;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-transition:0.3s;
-}
+        .car-img-container {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--glass-border);
+        }
 
-.car-card:hover{
-transform:translateY(-8px);
-}
+        .car-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
 
-.car-card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
+        .car-card:hover .car-img-container img {
+            transform: scale(1.05);
+        }
 
-.car-info{
-padding:25px;
-}
+        .car-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-.car-info h3{
-font-size:24px;
-margin-bottom:10px;
-}
+        .car-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
 
-.price{
-color:#00b4d8;
-font-size:20px;
-font-weight:700;
-margin-bottom:20px;
-}
+        .car-category {
+            color: #a3d5ff;
+            background: rgba(0, 180, 216, 0.15);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
 
-.car-info button{
-width:100%;
-padding:14px;
-border:none;
-background:#0d1b2a;
-color:#fff;
-border-radius:10px;
-font-size:15px;
-cursor:pointer;
-font-weight:600;
-transition:0.3s;
-}
+        .car-info h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
 
-.car-info button:hover{
-background:#00b4d8;
-}
+        .price {
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
 
-/* FOOTER */
+        .car-info button {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.04);
+            color: #fff;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-footer{
-background:#06111d;
-color:#aaa;
-text-align:center;
-padding:25px;
-}
+        .car-info button:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 6px 15px rgba(0, 180, 216, 0.3);
+            transform: translateY(-1px);
+        }
 
-/* RESPONSIVE */
+        /* NO RESULTS TEXT */
+        #noResults {
+            text-align: center;
+            font-size: 18px;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+            padding: 40px 0;
+            display: none;
+        }
 
-@media(max-width:768px){
+        /* FOOTER */
+        footer.site-footer {
+            background: rgba(7, 10, 24, 0.78);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.28);
+            color: #d2d8e8;
+            padding: 60px 7%;
+            margin-top: 40px;
+        }
 
-.hero h1{
-font-size:38px;
-}
+        .footer-top {
+            display: grid;
+            grid-template-columns: minmax(260px, 1.5fr) repeat(3, minmax(160px, 1fr));
+            gap: 32px;
+            align-items: start;
+        }
 
-nav{
-flex-direction:column;
-gap:20px;
-}
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
 
-nav ul{
-flex-wrap:wrap;
-justify-content:center;
-}
+        .footer-description {
+            max-width: 420px;
+            line-height: 1.9;
+            color: #bcc6d9;
+            margin-bottom: 24px;
+        }
 
-}
+        .footer-social {
+            display: flex;
+            gap: 14px;
+        }
 
-</style>
+        .social-link {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.14);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.24);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(160px, 1fr));
+            gap: 24px;
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-bottom: 20px;
+            color: #f7f7f7;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #c9d4ea;
+            text-decoration: none;
+            margin-bottom: 14px;
+            font-size: 15px;
+            transition: transform 0.3s ease, color 0.3s ease;
+            position: relative;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .footer-column a.active-link {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        .footer-column a.active-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 28px;
+            height: 2px;
+            border-radius: 999px;
+            background: #ffd700;
+        }
+
+        nav ul li a.active-link {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        nav ul li a.active-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -9px;
+            width: 20px;
+            height: 2px;
+            background: #ffd700;
+            border-radius: 999px;
+        }
+
+        nav ul li a {
+            position: relative;
+        }
+
+        .footer-divider {
+            height: 1px;
+            margin: 42px 0 26px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            color: #9aa7c0;
+            font-size: 14px;
+        }
+
+        .footer-note {
+            opacity: 0.8;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 8, 25, 0.72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.32s ease;
+            z-index: 1500;
+        }
+
+        .modal-backdrop.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            width: min(1080px, 95%);
+            max-height: 90vh;
+            padding: 32px;
+            background: rgba(8, 14, 32, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+            border-radius: 28px;
+            transform: translateY(18px) scale(0.96);
+            transition: transform 0.34s ease, opacity 0.34s ease;
+            opacity: 0;
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+        }
+
+        .modal-backdrop.visible .modal-card {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            font-size: 20px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: transform 0.25s ease, background 0.25s ease;
+            z-index: 1;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.08);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .modal-content {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .modal-content h2,
+        .modal-content h3 {
+            font-size: clamp(28px, 2.4vw, 34px);
+            margin-bottom: 18px;
+            color: #ffffff;
+            line-height: 1.05;
+        }
+
+        .modal-content p {
+            color: #cfd7eb;
+            line-height: 1.85;
+            margin-bottom: 28px;
+            font-size: 16px;
+            max-width: 100%;
+        }
+
+        .modal-content .about-text {
+            display: grid;
+            gap: 20px;
+        }
+
+        .modal-content .about-text span {
+            color: var(--primary);
+        }
+
+        .modal-content .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .modal-content .features-grid > div {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #edf3ff;
+            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .modal-content .features-grid > div:hover {
+            transform: translateY(-2px);
+            background: rgba(4, 105, 248, 0.12);
+            box-shadow: 0 20px 40px rgba(0, 128, 255, 0.14);
+        }
+
+        .modal-content .features-grid > div i {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: rgba(0, 175, 255, 0.14);
+            color: #7be0ff;
+            font-size: 18px;
+        }
+
+        .modal-features {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .feature-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #edf3ff;
+            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            background: rgba(4, 105, 248, 0.12);
+            box-shadow: 0 20px 40px rgba(0, 128, 255, 0.14);
+        }
+
+        .feature-card i {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: rgba(0, 175, 255, 0.14);
+            color: #7be0ff;
+            font-size: 18px;
+        }
+
+        .modal-image {
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .modal-image:hover img {
+            transform: scale(1.04);
+        }
+
+        @media (max-width: 980px) {
+            .modal-content {
+                gap: 24px;
+            }
+            .modal-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .modal-card {
+                padding: 22px;
+            }
+            .modal-content {
+                display: flex;
+                flex-direction: column;
+            }
+            .modal-image {
+                min-height: 260px;
+            }
+            .modal-content h3 {
+                font-size: 26px;
+            }
+            .modal-content p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .modal-card {
+                width: 95%;
+                max-height: 90vh;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, minmax(160px, 1fr));
+            }
+        }
+
+        @media (max-width: 620px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer-column a:hover {
+                transform: none;
+            }
+        }
+
+        /* CATEGORY FILTER SECTION */
+        .category-section {
+            padding: 30px 7% 40px;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 180, 216, 0.03) 0%, transparent 100%);
+        }
+
+        .category-wrapper {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 0;
+        }
+
+        .category-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-container {
+            display: flex;
+            gap: 12px;
+            padding: 0;
+            min-width: min-content;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 12px 24px;
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            color: #fff;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .category-btn:hover {
+            border-color: rgba(0, 180, 216, 0.4);
+            background: rgba(0, 180, 216, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 180, 216, 0.2);
+        }
+
+        .category-btn:hover::before {
+            left: 100%;
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, #0096c7 100%);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(0, 180, 216, 0.4);
+            transform: scale(1.05);
+        }
+
+        .category-btn.active:hover {
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 180, 216, 0.5);
+        }
+
+        /* ANIMATION FOR CATEGORY FILTERS */
+        @keyframes slideInCategory {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .category-btn {
+            animation: slideInCategory 0.5s ease forwards;
+        }
+
+        .category-btn:nth-child(1) { animation-delay: 0s; }
+        .category-btn:nth-child(2) { animation-delay: 0.05s; }
+        .category-btn:nth-child(3) { animation-delay: 0.1s; }
+        .category-btn:nth-child(4) { animation-delay: 0.15s; }
+        .category-btn:nth-child(5) { animation-delay: 0.2s; }
+        .category-btn:nth-child(6) { animation-delay: 0.25s; }
+        .category-btn:nth-child(7) { animation-delay: 0.3s; }
+        .category-btn:nth-child(n+8) { animation-delay: 0.35s; }
+
+        /* CAR CARD ANIMATIONS */
+        @keyframes fadeInCard {
+            from {
+                opacity: 0;
+                transform: translateY(15px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeOutCard {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(15px) scale(0.95);
+            }
+        }
+
+        .car-card.hidden {
+            display: none !important;
+        }
+
+        .car-card.visible {
+            animation: fadeInCard 0.4s ease forwards;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            .hero h1 {
+                font-size: 38px;
+            }
+            section {
+                padding: 40px 5% 60px;
+            }
+
+            .category-section {
+                padding: 25px 5% 35px;
+            }
+
+            .category-container {
+                justify-content: flex-start;
+                gap: 10px;
+            }
+
+            .category-btn {
+                padding: 10px 18px;
+                font-size: 13px;
+                flex-shrink: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-
-<nav>
-
-<div class="logo">
-AVS <span>DRIVE</span>
-</div>
-
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="booking.html">Book Car</a></li>
-</ul>
-
-<a href="index.html" class="book-btn">
-BACK TO HOME
-</a>
-
-</nav>
-
-<!-- HERO -->
-
-<section class="hero">
-
-<h1>Our Cars Collection</h1>
-
-<p>
-Search & Book Your Favourite Car Easily
-</p>
-
-</section>
-
-<!-- SEARCH -->
-
-<section class="search-section">
-
-<div class="search-box">
-
-<input
-type="text"
-id="searchInput"
-placeholder="Search Cars Like Swift, Creta, Scorpio..."
-onkeyup="searchCars()"
-/>
-
-</div>
-
-</section>
-
-<!-- CARS -->
-
-<section class="car-section">
-
-<div class="car-grid" id="carGrid">
-
-<!-- CAR 1 -->
-
-<div class="car-card">
-<img src="https://www.rushlane.com/wp-content/uploads/2024/02/2024-maruti-swift-india-launch-9-may-2024-5-1068x601.jpg">
-<div class="car-info">
-<h3>Maruti Swift</h3>
-<div class="price">₹1,999 / Day</div>
-<button onclick="openBooking('Maruti Swift')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 2 -->
-
-<div class="car-card">
-<img src="https://img.gaadicdn.com/images/car-images/large/Hyundai/Creta/11439/1777531540562/Atlas-White_d8dfe5.jpg">
-<div class="car-info">
-<h3>Hyundai Creta</h3>
-<div class="price">₹3,499 / Day</div>
-<button onclick="openBooking('Hyundai Creta')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 3 -->
-
-<div class="car-card">
-<img src="https://cdn-s3.autocarindia.com/legacy/cdni/mmv_images/colors/20250714125759_Mahindra_Scorpio_Classic_Stealth_Black[1].jpg?w=728&q=75">
-<div class="car-info">
-<h3>Mahindra Scorpio</h3>
-<div class="price">₹4,000 / Day</div>
-<button onclick="openBooking('Mahindra Scorpio')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 4 -->
-
-<div class="car-card">
-<img src="https://auto.hindustantimes.com/_next/image?url=https%3A%2F%2Fcatalog-management.s3.ap-south-1.amazonaws.com%2Fhtmobile1%2Ftata_nexonevmax%2Fimages%2Fexterior_tata-nexon-ev-max-dark_front-view_600x400.jpeg&w=1080&q=75">
-<div class="car-info">
-<h3>Tata Nexon</h3>
-<div class="price">₹3,000 / Day</div>
-<button onclick="openBooking('Tata Nexon')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 5 -->
-
-<div class="car-card">
-<img src="https://imgd-ct.aeplcdn.com/664x415/n/9vhedib_1893759.avif?q=80">
-<div class="car-info">
-<h3>Kia Seltos</h3>
-<div class="price">₹3,500 / Day</div>
-<button onclick="openBooking('Kia Seltos')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 6 -->
-
-<div class="car-card">
-<img src="https://stimg.cardekho.com/images/carexteriorimages/630x420/Hyundai/i20/11092/1755774177956/front-left-side-47.jpg">
-<div class="car-info">
-<h3>Hyundai i20</h3>
-<div class="price">₹1,999 / Day</div>
-<button onclick="openBooking('Hyundai i20')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 7 -->
-
-<div class="car-card">
-<img src="https://cdn-s3.autocarindia.com/legacy/cdni/ExtraImages/20190128051622_2019-Baleno-front-studio.jpg?w=728&q=75">
-<div class="car-info">
-<h3>Maruti Baleno</h3>
-<div class="price">₹2,499 / Day</div>
-<button onclick="openBooking('Maruti Baleno')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 8 -->
-
-<div class="car-card">
-<img src="https://www.indiacarnews.com/wp-content/uploads/2022/08/New-Toyota-Fortuner-Leader.jpg">
-<div class="car-info">
-<h3>Toyota Fortuner</h3>
-<div class="price">₹10,999 / Day</div>
-<button onclick="openBooking('Toyota Fortuner')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 9 -->
-
-<div class="car-card">
-<img src="https://static.caronphone.com/public/brands/20/685/3200/3200_1759751953.webp">
-<div class="car-info">
-<h3>Mahindra Thar</h3>
-<div class="price">₹4,999 / Day</div>
-<button onclick="openBooking('Mahindra Thar')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 10 -->
-
-<div class="car-card">
-<img src="https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Brezza/10400/1770885013083/front-left-side-47.jpg">
-<div class="car-info">
-<h3>Maruti Brezza</h3>
-<div class="price">₹2,999 / Day</div>
-<button onclick="openBooking('Maruti Brezza')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 11 -->
-
-<div class="car-card">
-<img src="https://img.autocarpro.in/autocarpro/b919f588-7af6-4b63-9a97-9e22dbd777e5_blackhyundai.jpg?w=750&h=490&q=75&c=1">
-<div class="car-info">
-<h3>Hyundai Venue</h3>
-<div class="price">₹2,999 / Day</div>
-<button onclick="openBooking('Hyundai Venue')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 12 -->
-
-<div class="car-card">
-<img src="https://imgd-ct.aeplcdn.com/1056x660/n/ltan3cb_1726711.png?q=80">
-<div class="car-info">
-<h3>Kia Sonet</h3>
-<div class="price">₹2,999 / Day</div>
-<button onclick="openBooking('Kia Sonet')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 13 -->
-
-<div class="car-card">
-<img src="https://img.gaadicdn.com/images/car-images/large/Tata/Punch/13202/1768376767777/226_Pristine-White_FEFEFE.jpg">
-<div class="car-info">
-<h3>Tata Punch</h3>
-<div class="price">₹1,999 / Day</div>
-<button onclick="openBooking('Tata Punch')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 14 -->
-
-<div class="car-card">
-<img src="https://img.gaadicdn.com/images/car-images/large/Mahindra/Scorpio-N/10818/1752569630215/EVEREST-WHITE_cfcfd0.jpg">
-<div class="car-info">
-<h3>Scorpio N</h3>
-<div class="price">₹4,999 / Day</div>
-<button onclick="openBooking('Renault Kwid')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 15 -->
-
-<div class="car-card">
-<img src="https://etimg.etb2bimg.com/photo/122873849.cms">
-<div class="car-info">
-<h3>Maruti Fronx</h3>
-<div class="price">₹2,499 / Day</div>
-<button onclick="openBooking('Maruti WagonR')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 16 -->
-
-<div class="car-card">
-<img src="https://c.ndtvimg.com/2025-06/4dq9qiug_verna_625x300_04_June_25.jpg?im=FitAndFill,algorithm=dnn,width=773,height=435">
-<div class="car-info">
-<h3>Hyundai Verna</h3>
-<div class="price">₹3000 / Day</div>
-<button onclick="openBooking('Hyundai Verna')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 17 -->
-
-<div class="car-card">
-<img src="https://imgd-ct.aeplcdn.com/1056x660/n/c6es93a_1572125.jpg?q=80">
-<div class="car-info">
-<h3>Maruti Ertiga</h3>
-<div class="price">₹3200 / Day</div>
-<button onclick="openBooking('Honda City')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 18 -->
-
-<div class="car-card">
-<img src="https://cdn.carhp.in/toyota/toyota_innova_hycross_platinum_white_pearl.jpg?format=webp&width=800&q=75">
-<div class="car-info">
-<h3>Toyota Innova</h3>
-<div class="price">₹5000 / Day</div>
-<button onclick="openBooking('Toyota Innova')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 19 -->
-
-<div class="car-card">
-<img src="https://asset.autocarindia.com/static/models/colors/20260106_074447_c25ddf61.png?w=728&q=75">
-<div class="car-info">
-<h3>Mahindra XUV700</h3>
-<div class="price">₹4800 / Day</div>
-<button onclick="openBooking('Mahindra XUV700')">Book Now</button>
-</div>
-</div>
-
-<!-- CAR 20 -->
-
-<div class="car-card">
-<img src="https://image.ntnews.com/wp-content/uploads/2023/05/MGGLOSTER_V_jpg--816x480-4g.webp?sw=1536&dsz=816x480&iw=740&p=false&r=1.25">
-<div class="car-info">
-<h3>MG Gloster</h3>
-<div class="price">₹4000 / Day</div>
-<button onclick="openBooking('Tata Harrier')">Book Now</button>
-</div>
-</div>
-<!-- CAR 20 -->
-
-<div class="car-card">
-<img src="https://asset.autocarindia.com/static/models/colors/20251215_102127_4146174e.png?w=728&q=75">
-<div class="car-info">
-<h3>MG Hector</h3>
-<div class="price">₹4000 / Day</div>
-<button onclick="openBooking('Tata Harrier')">Book Now</button>
-</div>
-</div>
-</div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-
-© 2026 AVS DRIVE | All Rights Reserved
-
-</footer>
-
-<script>
-
-function searchCars(){
-
-let input =
-document.getElementById("searchInput").value.toLowerCase();
-
-let cards =
-document.querySelectorAll(".car-card");
-
-cards.forEach(card => {
-
-let title =
-card.querySelector("h3").innerText.toLowerCase();
-
-if(title.includes(input)){
-
-card.style.display = "block";
-
-}else{
-
-card.style.display = "none";
-
-}
-
-});
-
-}
-
-function openBooking(carName){
-
-localStorage.setItem("selectedCar", carName);
-
-window.location.href = "booking.html";
-
-}
-
-</script>
+    <nav>
+        <div class="logo">AVS <span>DRIVE</span></div>
+        <ul>
+            <li><a href="index.html" data-page="home">Home</a></li>
+            <li><a href="booking.html" data-page="book">Book Car</a></li>
+        </ul>
+        <a href="index.html" class="btn-premium">BACK TO HOME</a>
+    </nav>
+
+    <section class="hero">
+        <h1>Our Cars <span>Collection</span></h1>
+        <p>Search & Book Your Favourite Car Easily</p>
+    </section>
+
+    <section class="search-section">
+        <div class="search-box-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search Cars Like Swift, Creta, Scorpio..." onkeyup="filterCarsAdvanced()" />
+        </div>
+    </section>
+
+    <!-- CATEGORY FILTER SECTION -->
+    <section class="category-section">
+        <div class="category-wrapper">
+            <div class="category-container" id="categoryContainer"></div>
+        </div>
+    </section>
+
+    <section style="padding-top: 0;">
+        <div class="car-grid" id="carGrid">
+
+            <div class="car-card glass-card" data-price="1999" data-category="Hatchback">
+                <div class="car-img-container">
+                    <img src="https://www.rushlane.com/wp-content/uploads/2024/02/2024-maruti-swift-india-launch-9-may-2024-5-1068x601.jpg">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">Hatchback</span>
+                        <span class="price">₹1,999 / Day</span>
+                    </div>
+                    <h3>Maruti Swift</h3>
+                    <button onclick="openBooking('Maruti Swift')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="3499" data-category="SUV">
+                <div class="car-img-container">
+                    <img src="https://img.gaadicdn.com/images/car-images/large/Hyundai/Creta/11439/1777531540562/Atlas-White_d8dfe5.jpg">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">SUV</span>
+                        <span class="price">₹3,499 / Day</span>
+                    </div>
+                    <h3>Hyundai Creta</h3>
+                    <button onclick="openBooking('Hyundai Creta')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="4000" data-category="SUV">
+                <div class="car-img-container">
+                    <img src="https://cdn-s3.autocarindia.com/legacy/cdni/mmv_images/colors/20250714125759_Mahindra_Scorpio_Classic_Stealth_Black[1].jpg?w=728&q=75">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">SUV</span>
+                        <span class="price">₹4,000 / Day</span>
+                    </div>
+                    <h3>Mahindra Scorpio</h3>
+                    <button onclick="openBooking('Mahindra Scorpio')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="3000" data-category="SUV">
+                <div class="car-img-container">
+                    <img src="https://auto.hindustantimes.com/_next/image?url=https%3A%2F%2Fcatalog-management.s3.ap-south-1.amazonaws.com%2Fhtmobile1%2Ftata_nexonevmax%2Fimages%2Fexterior_tata-nexon-ev-max-dark_front-view_600x400.jpeg&w=1080&q=75">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">SUV</span>
+                        <span class="price">₹3,000 / Day</span>
+                    </div>
+                    <h3>Tata Nexon</h3>
+                    <button onclick="openBooking('Tata Nexon')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="3500" data-category="SUV">
+                <div class="car-img-container">
+                    <img src="https://imgd-ct.aeplcdn.com/664x415/n/9vhedib_1893759.avif?q=80">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">SUV</span>
+                        <span class="price">₹3,500 / Day</span>
+                    </div>
+                    <h3>Kia Seltos</h3>
+                    <button onclick="openBooking('Kia Seltos')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="1999" data-category="Hatchback">
+                <div class="car-img-container">
+                    <img src="https://stimg.cardekho.com/images/carexteriorimages/630x420/Hyundai/i20/11092/1755774177956/front-left-side-47.jpg">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">Hatchback</span>
+                        <span class="price">₹1,999 / Day</span>
+                    </div>
+                    <h3>Hyundai i20</h3>
+                    <button onclick="openBooking('Hyundai i20')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="2499" data-category="Hatchback">
+                <div class="car-img-container">
+                    <img src="https://cdn-s3.autocarindia.com/legacy/cdni/ExtraImages/20190128051622_2019-Baleno-front-studio.jpg?w=728&q=75">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">Hatchback</span>
+                        <span class="price">₹2,499 / Day</span>
+                    </div>
+                    <h3>Maruti Baleno</h3>
+                    <button onclick="openBooking('Maruti Baleno')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="10999" data-category="Luxury SUV">
+                <div class="car-img-container">
+                    <img src="https://www.indiacarnews.com/wp-content/uploads/2022/08/New-Toyota-Fortuner-Leader.jpg">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">Luxury SUV</span>
+                        <span class="price">₹10,999 / Day</span>
+                    </div>
+                    <h3>Toyota Fortuner</h3>
+                    <button onclick="openBooking('Toyota Fortuner')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="4999" data-category="SUV">
+                <div class="car-img-container">
+                    <img src="https://static.caronphone.com/public/brands/20/685/3200/3200_1759751953.webp">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">SUV</span>
+                        <span class="price">₹4,999 / Day</span>
+                    </div>
+                    <h3>Mahindra Thar</h3>
+                    <button onclick="openBooking('Mahindra Thar')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="2999" data-category="SUV">
+                <div class="car-img-container">
+                    <img src="https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Brezza/10400/1770885013083/front-left-side-47.jpg">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">SUV</span>
+                        <span class="price">₹2,999 / Day</span>
+                    </div>
+                    <h3>Maruti Brezza</h3>
+                    <button onclick="openBooking('Maruti Brezza')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="2999" data-category="SUV">
+                <div class="car-img-container">
+                    <img src="https://img.autocarpro.in/autocarpro/b919f588-7af6-4b63-9a97-9e22dbd777e5_blackhyundai.jpg?w=750&h=490&q=75&c=1">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">SUV</span>
+                        <span class="price">₹2,999 / Day</span>
+                    </div>
+                    <h3>Hyundai Venue</h3>
+                    <button onclick="openBooking('Hyundai Venue')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="2999" data-category="SUV">
+                <div class="car-img-container">
+                    <img src="https://imgd-ct.aeplcdn.com/1056x660/n/ltan3cb_1726711.png?q=80">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">SUV</span>
+                        <span class="price">₹2,999 / Day</span>
+                    </div>
+                    <h3>Kia Sonet</h3>
+                    <button onclick="openBooking('Kia Sonet')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="1999" data-category="Compact SUV">
+                <div class="car-img-container">
+                    <img src="https://img.gaadicdn.com/images/car-images/large/Tata/Punch/13202/1768376767777/226_Pristine-White_FEFEFE.jpg">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">Compact SUV</span>
+                        <span class="price">₹1,999 / Day</span>
+                    </div>
+                    <h3>Tata Punch</h3>
+                    <button onclick="openBooking('Tata Punch')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="4999" data-category="SUV">
+                <div class="car-img-container">
+                    <img src="https://img.gaadicdn.com/images/car-images/large/Mahindra/Scorpio-N/10818/1752569630215/EVEREST-WHITE_cfcfd0.jpg">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">SUV</span>
+                        <span class="price">₹4,999 / Day</span>
+                    </div>
+                    <h3>Scorpio N</h3>
+                    <button onclick="openBooking('Scorpio N')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="2499" data-category="Hatchback">
+                <div class="car-img-container">
+                    <img src="https://etimg.etb2bimg.com/photo/122873849.cms">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">Hatchback</span>
+                        <span class="price">₹2,499 / Day</span>
+                    </div>
+                    <h3>Maruti Fronx</h3>
+                    <button onclick="openBooking('Maruti Fronx')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="3000" data-category="Sedan">
+                <div class="car-img-container">
+                    <img src="https://c.ndtvimg.com/2025-06/4dq9qiug_verna_625x300_04_June_25.jpg?im=FitAndFill,algorithm=dnn,width=773,height=435">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">Sedan</span>
+                        <span class="price">₹3,000 / Day</span>
+                    </div>
+                    <h3>Hyundai Verna</h3>
+                    <button onclick="openBooking('Hyundai Verna')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="3200" data-category="MPV">
+                <div class="car-img-container">
+                    <img src="https://imgd-ct.aeplcdn.com/1056x660/n/c6es93a_1572125.jpg?q=80">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">MPV</span>
+                        <span class="price">₹3,200 / Day</span>
+                    </div>
+                    <h3>Maruti Ertiga</h3>
+                    <button onclick="openBooking('Maruti Ertiga')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="5000" data-category="MPV">
+                <div class="car-img-container">
+                    <img src="https://cdn.carhp.in/toyota/toyota_innova_hycross_platinum_white_pearl.jpg?format=webp&width=800&q=75">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">MPV</span>
+                        <span class="price">₹5,000 / Day</span>
+                    </div>
+                    <h3>Toyota Innova</h3>
+                    <button onclick="openBooking('Toyota Innova')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="4800" data-category="Luxury SUV">
+                <div class="car-img-container">
+                    <img src="https://asset.autocarindia.com/static/models/colors/20260106_074447_c25ddf61.png?w=728&q=75">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">Luxury SUV</span>
+                        <span class="price">₹4,800 / Day</span>
+                    </div>
+                    <h3>Mahindra XUV700</h3>
+                    <button onclick="openBooking('Mahindra XUV700')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="4000" data-category="Luxury SUV">
+                <div class="car-img-container">
+                    <img src="https://image.ntnews.com/wp-content/uploads/2023/05/MGGLOSTER_V_jpg--816x480-4g.webp?sw=1536&dsz=816x480&iw=740&p=false&r=1.25">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">Luxury SUV</span>
+                        <span class="price">₹4,000 / Day</span>
+                    </div>
+                    <h3>MG Gloster</h3>
+                    <button onclick="openBooking('MG Gloster')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="car-card glass-card" data-price="4000" data-category="SUV">
+                <div class="car-img-container">
+                    <img src="https://asset.autocarindia.com/static/models/colors/20251215_102127_4146174e.png?w=728&q=75">
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-category">SUV</span>
+                        <span class="price">₹4,000 / Day</span>
+                    </div>
+                    <h3>MG Hector</h3>
+                    <button onclick="openBooking('MG Hector')">Book Now</button>
+                </div>
+            </div>
+
+            <div id="noResults" style="text-align: center; font-size: 18px; color: var(--text-muted); grid-column: 1 / -1; padding: 40px 0; display: none;">❌ No cars found matching your search.</div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">AVS DRIVE</div>
+                <p class="footer-description">Premium car rental service offering luxury SUVs, sedans, hatchbacks, and sports cars at affordable prices.</p>
+                <div class="footer-social">
+                    <a href="https://instagram.com/avs_drive" target="_blank" class="social-link insta" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/919717490134" target="_blank" class="social-link whatsapp" aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <a href="index.html" data-page="home">Home</a>
+                    <a href="cars.html" data-page="cars">Cars</a>
+                    <a href="#" data-page="about" data-modal="about">About Us</a>
+                    <a href="gallery.html" data-page="gallery">Gallery</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Car Categories</h4>
+                    <a href="cars.html#suv" data-page="cars">SUV</a>
+                    <a href="cars.html#sedan" data-page="cars">Sedan</a>
+                    <a href="cars.html#hatchback" data-page="cars">Hatchback</a>
+                    <a href="cars.html#luxury-suv" data-page="cars">Luxury SUV</a>
+                    <a href="cars.html#sports-car" data-page="cars">Sports Car</a>
+                    <a href="cars.html#premium-sedan" data-page="cars">Premium Sedan</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <a href="#" data-page="about" data-modal="about">About Us</a>
+                    <a href="contact.html" data-page="contact">Contact Us</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <a href="terms.html" data-page="legal">Terms & Services</a>
+                    <a href="privacy.html" data-page="legal">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <p>© 2026 BMW Rentals. All Rights Reserved.</p>
+            <p class="footer-note">Designed for premium car rental experience.</p>
+        </div>
+    </footer>
+
+    <div class="modal-backdrop" id="aboutModalBackdrop" aria-hidden="true">
+        <div class="modal-card glass-card" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+            <button class="modal-close" id="aboutModalClose" aria-label="Close About modal"><i class="fa-solid fa-xmark"></i></button>
+            <div id="aboutModalContent" class="modal-content">
+                <div class="modal-left">
+                    <h3 id="aboutModalTitle">About AVS DRIVE</h3>
+                    <p>AVS DRIVE provides trusted, safe, and highly affordable self-drive car rental services in Ghaziabad. We highly focus on customer comfort, immaculate vehicle conditions, and an easy transparent booking experience.</p>
+                    <div class="modal-features">
+                        <div class="feature-card"><i class="fa-solid fa-circle-check"></i><span>Affordable Daily Rental</span></div>
+                        <div class="feature-card"><i class="fa-solid fa-star"></i><span>Well Maintained Cars</span></div>
+                        <div class="feature-card"><i class="fa-brands fa-whatsapp"></i><span>Easy WhatsApp Booking</span></div>
+                        <div class="feature-card"><i class="fa-solid fa-headset"></i><span>24/7 Customer Support</span></div>
+                    </div>
+                </div>
+                <div class="modal-image">
+                    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop" alt="About AVS Drive">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Initialize categories on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeCategories();
+        applyActivePageLinks();
+        scrollToCategoryFromHash();
+        bindFooterModalLinks();
+    });
+
+    // Extract unique categories from car data
+    function getUniqueCategories() {
+        const cards = document.querySelectorAll(".car-card");
+        const categories = new Set();
+        
+        cards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (category) {
+                categories.add(category);
+            }
+        });
+        
+        return Array.from(categories).sort();
+    }
+
+    // Initialize category buttons
+    function initializeCategories() {
+        const categories = getUniqueCategories();
+        const container = document.getElementById('categoryContainer');
+        
+        // Clear existing buttons
+        container.innerHTML = '';
+        
+        // Add "All Cars" button first
+        const allCarsBtn = createCategoryButton('All Cars', true);
+        container.appendChild(allCarsBtn);
+        
+        // Add category buttons
+        categories.forEach(category => {
+            const btn = createCategoryButton(category, false);
+            container.appendChild(btn);
+        });
+    }
+
+    // Create a category button element
+    function createCategoryButton(categoryName, isActive = false) {
+        const btn = document.createElement('button');
+        btn.className = `category-btn ${isActive ? 'active' : ''}`;
+        btn.textContent = categoryName;
+        btn.setAttribute('data-category-filter', categoryName.toLowerCase());
+        
+        btn.addEventListener('click', function() {
+            // Update active state
+            document.querySelectorAll('.category-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // Filter cars
+            filterCarsAdvanced();
+        });
+        
+        return btn;
+    }
+
+    // Advanced filter combining search and category
+    function filterCarsAdvanced() {
+        const searchInput = document.getElementById("searchInput").value.toLowerCase().trim();
+        const activeCategory = document.querySelector('.category-btn.active');
+        const selectedCategory = activeCategory ? activeCategory.getAttribute('data-category-filter') : 'all cars';
+        
+        const cards = document.querySelectorAll(".car-card");
+        let hasResults = false;
+        
+        cards.forEach(card => {
+            const title = card.querySelector("h3").innerText.toLowerCase();
+            const category = card.getAttribute('data-category').toLowerCase();
+            
+            // Check both search and category filters
+            const matchesSearch = searchInput === '' || title.includes(searchInput);
+            const matchesCategory = selectedCategory === 'all cars' || category === selectedCategory;
+            
+            if (matchesSearch && matchesCategory) {
+                card.classList.remove('hidden');
+                card.classList.add('visible');
+                hasResults = true;
+                card.style.display = "flex";
+            } else {
+                card.classList.remove('visible');
+                card.classList.add('hidden');
+                card.style.display = "none";
+            }
+        });
+        
+        // Show "No Results" message
+        document.getElementById('noResults').style.display = hasResults ? "none" : "block";
+    }
+
+    // Keep searchCars function for backward compatibility
+    function searchCars() {
+        filterCarsAdvanced();
+    }
+
+    function openBooking(carName) {
+        localStorage.setItem("selectedCar", carName);
+        window.location.href = "booking.html";
+    }
+
+    const aboutModalBackdrop = document.getElementById('aboutModalBackdrop');
+    const aboutModalClose = document.getElementById('aboutModalClose');
+
+    function bindFooterModalLinks() {
+        document.querySelectorAll('a[data-modal="about"]').forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                showAboutModal();
+            });
+        });
+
+        aboutModalClose.addEventListener('click', hideAboutModal);
+        aboutModalBackdrop.addEventListener('click', function(event) {
+            if (event.target === aboutModalBackdrop) {
+                hideAboutModal();
+            }
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && aboutModalBackdrop.classList.contains('visible')) {
+                hideAboutModal();
+            }
+        });
+    }
+
+    async function loadAboutSectionHtml() {
+        const existingAbout = document.querySelector('.about');
+        if (existingAbout) {
+            return existingAbout.outerHTML;
+        }
+
+        try {
+            const response = await fetch('index.html', { cache: 'no-store' });
+            if (!response.ok) throw new Error('Unable to fetch homepage content');
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const section = doc.querySelector('.about');
+            if (section) {
+                return section.outerHTML;
+            }
+        } catch (error) {
+            console.warn('About section could not be loaded dynamically:', error);
+        }
+
+        return null;
+    }
+
+    async function showAboutModal() {
+        const modalContent = document.getElementById('aboutModalContent');
+        const loadedHtml = await loadAboutSectionHtml();
+
+        if (loadedHtml) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(loadedHtml, 'text/html');
+            const aboutSection = doc.querySelector('.about');
+
+            if (aboutSection) {
+                const aboutText = aboutSection.querySelector('.about-text');
+                const aboutImg = aboutSection.querySelector('.about-img');
+
+                const cloneText = aboutText ? aboutText.cloneNode(true) : null;
+                const cloneImg = aboutImg ? aboutImg.cloneNode(true) : null;
+
+                if (cloneText && cloneImg) {
+                    modalContent.innerHTML = '';
+                    const left = document.createElement('div');
+                    left.className = 'modal-left';
+                    left.appendChild(cloneText);
+
+                    const right = document.createElement('div');
+                    right.className = 'modal-image';
+                    const img = cloneImg.querySelector('img');
+                    if (img) {
+                        img.style.width = '100%';
+                        img.style.borderRadius = '24px';
+                        right.appendChild(img);
+                    }
+
+                    modalContent.appendChild(left);
+                    modalContent.appendChild(right);
+                }
+            }
+        }
+
+        aboutModalBackdrop.classList.add('visible');
+        aboutModalBackdrop.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hideAboutModal() {
+        aboutModalBackdrop.classList.remove('visible');
+        aboutModalBackdrop.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    function applyActivePageLinks() {
+        const pageMap = {
+            '': 'home',
+            'index.html': 'home',
+            'cars.html': 'cars',
+            'gallery.html': 'gallery',
+            'about.html': 'about',
+            'contact.html': 'contact'
+        };
+        const path = window.location.pathname.split('/').pop();
+        const currentPage = pageMap[path] || '';
+
+        document.querySelectorAll('nav a[data-page], .footer-column a[data-page]').forEach(link => {
+            link.classList.toggle('active-link', currentPage && link.dataset.page === currentPage);
+        });
+    }
+
+    function scrollToCategoryFromHash() {
+        const hash = window.location.hash.toLowerCase().replace('#', '');
+        if (!hash) return;
+
+        const normalizedHash = hash.replace(/[-\s]/g, '');
+        const cards = Array.from(document.querySelectorAll('.car-card'));
+        const target = cards.find(card => card.dataset.category.toLowerCase().replace(/[-\s]/g, '') === normalizedHash);
+
+        if (target) {
+            setTimeout(() => {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 80);
+        }
+    }
+    </script>
 
 </body>
 </html>

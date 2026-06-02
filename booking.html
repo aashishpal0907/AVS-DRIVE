@@ -1,366 +1,1325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Car | AVS DRIVE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #00b4d8;
+            --primary-hover: #0096c7;
+            --bg-dark: #050816;
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-muted: #aaa;
+        }
 
-<title>Book Your Car - AVS DRIVE</title>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        body {
+            background: linear-gradient(rgba(5, 8, 22, 0.85), rgba(5, 8, 22, 0.92)), url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-<style>
+        /* GLOBALS */
+        .btn-premium {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 26px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.25);
+            display: inline-block;
+            text-align: center;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+        .btn-premium:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 180, 216, 0.45);
+        }
 
-body{
-background:#f5f7fb;
-}
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
 
-/* NAVBAR */
+        section {
+            padding: 60px 7% 80px;
+        }
 
-nav{
-width:100%;
-background:#0d1b2a;
-padding:18px 7%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
 
-.logo{
-color:#fff;
-font-size:28px;
-font-weight:700;
-}
+        .section-title h2 {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
 
-.logo span{
-color:#00b4d8;
-}
+        .section-title h2 span {
+            color: var(--primary);
+        }
 
-.back-btn{
-text-decoration:none;
-background:#00b4d8;
-color:#fff;
-padding:12px 24px;
-border-radius:10px;
-font-weight:600;
-}
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
 
-/* BOOKING SECTION */
+        /* NAVBAR */
+        nav {
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 8, 22, 0.65);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+        }
 
-.booking-section{
-padding:80px 7%;
-display:flex;
-justify-content:center;
-align-items:center;
-}
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+        }
 
-.booking-box{
-width:100%;
-max-width:750px;
-background:#fff;
-padding:45px;
-border-radius:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-}
+        .logo span {
+            color: var(--primary);
+        }
 
-.booking-box h1{
-text-align:center;
-font-size:42px;
-margin-bottom:10px;
-color:#0d1b2a;
-}
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
 
-.booking-box p{
-text-align:center;
-color:#666;
-margin-bottom:35px;
-}
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
 
-/* FORM */
+        nav ul li a:hover {
+            color: var(--primary);
+        }
 
-.booking-form{
-display:flex;
-flex-direction:column;
-gap:20px;
-}
+        /* INTRO GRID */
+        .page-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 55px;
+        }
 
-.booking-form input,
-.booking-form select,
-.booking-form textarea{
-width:100%;
-padding:16px;
-border:1px solid #ddd;
-border-radius:12px;
-font-size:15px;
-outline:none;
-}
+        .intro-text h1 {
+            font-size: 44px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
 
-.booking-form input:focus,
-.booking-form select:focus,
-.booking-form textarea:focus{
-border-color:#00b4d8;
-}
+        .intro-text h1 span {
+            color: var(--primary);
+        }
 
-.booking-form button{
-padding:16px;
-border:none;
-background:#00b4d8;
-color:#fff;
-font-size:16px;
-border-radius:12px;
-cursor:pointer;
-font-weight:600;
-transition:0.3s;
-}
+        .intro-text p {
+            color: #ddd;
+            line-height: 1.8;
+            font-size: 16px;
+        }
 
-.booking-form button:hover{
-background:#0096c7;
-}
+        .intro-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* FOOTER */
+        .intro-image img {
+            width: 100%;
+            max-width: 500px;
+            filter: drop-shadow(0 10px 25px rgba(0, 180, 216, 0.15));
+            animation: float 4s ease-in-out infinite;
+        }
 
-footer{
-background:#06111d;
-color:#aaa;
-text-align:center;
-padding:25px;
-margin-top:40px;
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
-/* RESPONSIVE */
+        /* BOOKING WRAPPER */
+        .booking-wrapper {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            align-items: start;
+        }
 
-@media(max-width:768px){
+        .booking-card {
+            padding: 40px;
+        }
 
-.booking-box{
-padding:25px;
-}
+        .booking-card h3 {
+            margin-bottom: 30px;
+            font-size: 26px;
+            font-weight: 600;
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+        }
 
-.booking-box h1{
-font-size:34px;
-}
+        .booking-card label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-size: 14px;
+            font-weight: 500;
+        }
 
-nav{
-flex-direction:column;
-gap:20px;
-}
+        .booking-card input,
+        .booking-card select,
+        .booking-card textarea {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 22px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.25);
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
 
-}
-body{
-margin:0;
-padding:0;
+        .booking-card input:focus,
+        .booking-card select:focus,
+        .booking-card textarea:focus {
+            border-color: var(--primary);
+            background: rgba(0, 0, 0, 0.35);
+            box-shadow: 0 0 10px rgba(0, 180, 216, 0.2);
+        }
 
-background:
-linear-gradient(rgba(0,0,0,0.70),
-rgba(0,0,0,0.75)),
-url('bg.jpg');
+        .booking-card select option {
+            background: #0d1b2a;
+            color: #fff;
+        }
 
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-background-attachment: fixed;
+        .price-summary {
+            margin: 24px 0 30px;
+            padding: 22px 20px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
 
-font-family: Arial, sans-serif;
-}
+        .summary-row,
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            color: #ddd;
+        }
 
-/* GLASS EFFECT */
+        .summary-total {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            font-size: 18px;
+            color: #fff;
+            font-weight: 700;
+        }
 
-.booking-box{
-background: rgba(255,255,255,0.08);
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 10px;
+            min-height: 20px;
+        }
 
-backdrop-filter: blur(15px);
+        .summary-panel {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            min-height: 100%;
+        }
 
--webkit-backdrop-filter: blur(15px);
+        .summary-panel h3 {
+            margin-bottom: 0;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-border: 1px solid rgba(255,255,255,0.15);
+        .summary-card {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 16px;
+            padding: 22px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            align-items: center;
+        }
 
-box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        .summary-card img {
+            width: 100%;
+            border-radius: 18px;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border: 1px solid rgba(255,255,255,0.14);
+            max-height: 140px;
+        }
 
-border-radius: 20px;
-}
-  .h1 h1{
-    color: white;
-    font-size: 60px;
-    font-weight: bold;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    text-shadow: 0px 0px 10px rgba(0,0,0,0.7);
-}
-</style>
+        .summary-info h4 {
+            margin: 0 0 10px;
+            font-size: 22px;
+            line-height: 1.2;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(0, 180, 216, 0.16);
+            color: #8fd7ff;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        #summaryBookButton {
+            width: 100%;
+            padding: 14px;
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        #summaryBookButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.2);
+        }
+
+        .note-box {
+            padding: 24px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .note-box h3 {
+            margin-bottom: 0;
+            font-size: 20px;
+        }
+
+        .note-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .note-item i {
+            margin-top: 4px;
+        }
+
+        .booking-card textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        /* NOTE BOX */
+        .note-box {
+            padding: 35px;
+        }
+
+        .note-box h3 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .note-box h3 i {
+            color: var(--primary);
+        }
+
+        .note-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 22px;
+            align-items: flex-start;
+        }
+
+        .note-item i {
+            color: var(--primary);
+            font-size: 18px;
+            margin-top: 4px;
+        }
+
+        .note-item p {
+            color: #ddd;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .note-item strong {
+            color: #fff;
+        }
+
+        /* FOOTER */
+        footer.site-footer {
+            background: rgba(7, 10, 24, 0.78);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.28);
+            color: #d2d8e8;
+            padding: 60px 7%;
+            margin-top: 40px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: minmax(260px, 1.5fr) repeat(3, minmax(160px, 1fr));
+            gap: 32px;
+            align-items: start;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .footer-description {
+            max-width: 420px;
+            line-height: 1.9;
+            color: #bcc6d9;
+            margin-bottom: 24px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 14px;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.14);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.24);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(160px, 1fr));
+            gap: 24px;
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-bottom: 20px;
+            color: #f7f7f7;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #c9d4ea;
+            text-decoration: none;
+            margin-bottom: 14px;
+            font-size: 15px;
+            transition: transform 0.3s ease, color 0.3s ease;
+            position: relative;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .footer-column a.active-link {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        .footer-column a.active-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 28px;
+            height: 2px;
+            border-radius: 999px;
+            background: #ffd700;
+        }
+
+        nav ul li a.active-link {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        nav ul li a.active-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -9px;
+            width: 20px;
+            height: 2px;
+            background: #ffd700;
+            border-radius: 999px;
+        }
+
+        nav ul li a {
+            position: relative;
+        }
+
+        .footer-divider {
+            height: 1px;
+            margin: 42px 0 26px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            color: #9aa7c0;
+            font-size: 14px;
+        }
+
+        .footer-note {
+            opacity: 0.8;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 8, 25, 0.72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.32s ease;
+            z-index: 1500;
+        }
+
+        .modal-backdrop.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            width: min(1080px, 95%);
+            max-height: 90vh;
+            padding: 32px;
+            background: rgba(8, 14, 32, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+            border-radius: 28px;
+            transform: translateY(18px) scale(0.96);
+            transition: transform 0.34s ease, opacity 0.34s ease;
+            opacity: 0;
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+        }
+
+        .modal-backdrop.visible .modal-card {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            font-size: 20px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: transform 0.25s ease, background 0.25s ease;
+            z-index: 1;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.08);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .modal-content {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .modal-left {
+            display: grid;
+            gap: 20px;
+        }
+
+        .modal-left h2,
+        .modal-left h3 {
+            font-size: clamp(28px, 2.4vw, 34px);
+            color: #ffffff;
+            line-height: 1.05;
+            margin: 0;
+        }
+
+        .modal-left p {
+            color: #cfd7eb;
+            line-height: 1.85;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .modal-left .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .modal-left .features-grid > div {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #edf3ff;
+            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .modal-left .features-grid > div:hover {
+            transform: translateY(-2px);
+            background: rgba(4, 105, 248, 0.12);
+            box-shadow: 0 20px 40px rgba(0, 128, 255, 0.14);
+        }
+
+        .modal-left .features-grid > div i {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: rgba(0, 175, 255, 0.14);
+            color: #7be0ff;
+            font-size: 18px;
+        }
+
+        .modal-image {
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .modal-image:hover img {
+            transform: scale(1.04);
+        }
+
+        @media (max-width: 980px) {
+            .modal-content {
+                gap: 24px;
+            }
+            .modal-left .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .modal-card {
+                padding: 22px;
+            }
+            .modal-content {
+                display: flex;
+                flex-direction: column;
+            }
+            .modal-image {
+                min-height: 260px;
+            }
+            .modal-left h2,
+            .modal-left h3 {
+                font-size: 26px;
+            }
+            .modal-left p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .modal-card {
+                width: 95%;
+                max-height: 90vh;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, minmax(160px, 1fr));
+            }
+        }
+
+        @media (max-width: 620px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer-column a:hover {
+                transform: none;
+            }
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 992px) {
+            .page-intro {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .intro-text p {
+                margin: 0 auto;
+            }
+            .booking-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            section {
+                padding: 50px 5%;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .section-title h2 {
+                font-size: 32px;
+            }
+            .summary-card {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                padding: 18px;
+            }
+            .summary-card img {
+                max-height: 110px;
+            }
+            .summary-info h4 {
+                font-size: 18px;
+            }
+            .summary-row,
+            .summary-total {
+                font-size: 14px;
+            }
+            .badge {
+                font-size: 12px;
+                padding: 5px 12px;
+            }
+            .summary-panel {
+                padding: 20px;
+                gap: 18px;
+            }
+        }
+        
+    </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+    <nav>
+        <div class="logo">AVS <span>DRIVE</span></div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#cars">Cars</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <a href="index.html" class="btn-premium">Back Home</a>
+    </nav>
 
-<nav>
+    <section>
+        <div class="section-title">
+            <h2>Reserve a <span>Car</span></h2>
+            <p>Fill in your travel details, choose a car, and submit your booking request instantly.</p>
+        </div>
 
-<div class="logo">
-AVS <span>DRIVE</span>
-</div>
+        <div class="page-intro">
+            <div class="intro-text">
+                <h1>Fast & Secure <span>Car Reservation</span></h1>
+                <p>Book your preferred ride from our premium fleet. We will instantly confirm your reservation on WhatsApp and help arrange smooth pickup or delivery details right away in Ghaziabad.</p>
+            </div>
+            <div class="intro-image">
+                <img src="image/carbooking.jpg.png" alt="Book a car">
+            </div>
+        </div>
 
-<a href="index.html" class="back-btn">
-Back To Home
-</a>
+        <div class="booking-wrapper">
+            <div class="booking-card glass-card">
+                <h3>Booking Details</h3>
+                <form id="bookingForm">
+                    <label for="customerName">Full Name</label>
+                    <input type="text" id="customerName" placeholder="Enter your name" required>
 
-</nav>
+                    <label for="customerPhone">Mobile Number</label>
+                    <input type="tel" id="customerPhone" placeholder="Enter your mobile number" required>
 
-<!-- BOOKING -->
+                    <label for="customerEmail">Email Address</label>
+                    <input type="email" id="customerEmail" placeholder="Enter your email address" required>
 
-<section class="booking-section">
+                    <div class="form-row">
+                        <div>
+                            <label for="pickupDate">Pickup Date</label>
+                            <input type="date" id="pickupDate" required>
+                        </div>
+                        <div>
+                            <label for="returnDate">Return Date</label>
+                            <input type="date" id="returnDate" required>
+                        </div>
+                    </div>
 
-<div class="booking-box">
-<div class="h1">  
-<h1>Book Your Car</h1>
-</div>  
-<p>
-Fill Your Details & Confirm Booking On WhatsApp
-</p>
+                    <label for="selectedCar">Select Car</label>
+                    <select id="selectedCar" required>
+                        <option value="">Loading available cars...</option>
+                    </select>
 
-<form class="booking-form" id="bookingForm">
+                    <label for="pickupLocation">Pickup Location</label>
+                    <input type="text" id="pickupLocation" placeholder="Enter pickup location" required>
 
-<!-- CUSTOMER NAME -->
 
-<input
-type="text"
-id="name"
-placeholder="Enter Your Name"
-required
->
+                    
+                    <div class="price-summary glass-card">
+                        <div class="summary-row"><span>Price Per Day</span><strong id="summaryPrice">₹0</strong></div>
+                        <div class="summary-row"><span>Rental Days</span><strong id="summaryDays">0</strong></div>
+                        <div class="summary-row"><span>Subtotal</span><strong id="summarySubtotal">₹0</strong></div>
+                        <div class="summary-total"><span>Grand Total</span><strong id="summaryTotal">₹0</strong></div>
+                        <p class="error-message" id="pricingError"></p>
+                    </div>
 
-<!-- MOBILE -->
+                    <button type="submit" class="btn-premium">Confirm Booking On WhatsApp</button>
+                </form>
+            </div>
 
-<input
-type="tel"
-id="mobile"
-placeholder="Enter Mobile Number"
-required
->
+            <div class="summary-panel glass-card">
+                <h3><i class="fa-solid fa-car-side"></i> Booking Summary</h3>
+                <div class="summary-card">
+                    <img id="summaryImage" src="car.png" alt="Selected car image">
+                    <div class="summary-info">
+                        <span class="badge" id="summaryCategory">Category</span>
+                        <h4 id="summaryCarName">Select a car to see details</h4>
+                        <div class="summary-row"><span>Price/Day</span><strong id="summaryCardPrice">₹0</strong></div>
+                        <div class="summary-row"><span>Days</span><strong id="summaryCardDays">0</strong></div>
+                        <div class="summary-line total"><span>Total Price</span><strong id="summaryCardTotal">₹0</strong></div>
+                    </div>
+                </div>
+                <button id="summaryBookButton" type="button" class="btn-premium">Book Now</button>
 
-<!-- CAR SELECT -->
+                <div class="note-box">
+                    <h3><i class="fa-solid fa-circle-info"></i> Quick Booking Notes</h3>
+                    <div class="note-item">
+                        <i class="fa-solid fa-bolt"></i>
+                        <p><strong>Live pricing:</strong> Pricing updates instantly when you choose a car or change dates.</p>
+                    </div>
+                    <div class="note-item">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                        <p><strong>Flexible pickup:</strong> Enter any trusted Ghaziabad location and we will coordinate delivery.</p>
+                    </div>
+                    <div class="note-item">
+                        <i class="fa-solid fa-phone-volume"></i>
+                        <p><strong>Support ready:</strong> Phone or WhatsApp support is available for fast confirmation.</p>
+                    </div>
+                    <div class="note-item">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <p><strong>Premium care:</strong> Every car is sanitized, inspected, and prepared for a luxury rental experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<select id="carSelect" required>
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">AVS DRIVE</div>
+                <p class="footer-description">Premium car rental service offering luxury SUVs, sedans, hatchbacks, and sports cars at affordable prices.</p>
+                <div class="footer-social">
+                    <a href="https://instagram.com/avs_drive" target="_blank" class="social-link insta" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/919717490134" target="_blank" class="social-link whatsapp" aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <a href="index.html" data-page="home">Home</a>
+                    <a href="cars.html" data-page="cars">Cars</a>
+                    <a href="#" data-page="about" data-modal="about">About Us</a>
+                    <a href="gallery.html" data-page="gallery">Gallery</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Car Categories</h4>
+                    <a href="cars.html#suv" data-page="cars">SUV</a>
+                    <a href="cars.html#sedan" data-page="cars">Sedan</a>
+                    <a href="cars.html#hatchback" data-page="cars">Hatchback</a>
+                    <a href="cars.html#luxury-suv" data-page="cars">Luxury SUV</a>
+                    <a href="cars.html#sports-car" data-page="cars">Sports Car</a>
+                    <a href="cars.html#premium-sedan" data-page="cars">Premium Sedan</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <a href="#" data-page="about" data-modal="about">About Us</a>
+                    <a href="contact.html" data-page="contact">Contact Us</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <a href="terms.html" data-page="legal">Terms & Services</a>
+                    <a href="privacy.html" data-page="legal">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <p>© 2026 BMW Rentals. All Rights Reserved.</p>
+            <p class="footer-note">Designed for premium car rental experience.</p>
+        </div>
+    </footer>
 
-<option value="">Select Your Car</option>
+    <div class="modal-backdrop" id="aboutModalBackdrop" aria-hidden="true">
+        <div class="modal-card glass-card" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+            <button class="modal-close" id="aboutModalClose" aria-label="Close About modal"><i class="fa-solid fa-xmark"></i></button>
+            <div id="aboutModalContent" class="modal-content">
+                <div class="modal-left">
+                    <h3 id="aboutModalTitle">About AVS DRIVE</h3>
+                    <p>AVS DRIVE provides trusted, safe, and highly affordable self-drive car rental services in Ghaziabad. We highly focus on customer comfort, immaculate vehicle conditions, and an easy transparent booking experience.</p>
+                    <div class="features-grid">
+                        <div><i class="fa-solid fa-circle-check"></i> Affordable Daily Rental</div>
+                        <div><i class="fa-solid fa-star"></i> Well Maintained Cars</div>
+                        <div><i class="fa-brands fa-whatsapp"></i> Easy WhatsApp Booking</div>
+                        <div><i class="fa-solid fa-headset"></i> 24/7 Customer Support</div>
+                    </div>
+                </div>
+                <div class="modal-image">
+                    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop" alt="About AVS Drive">
+                </div>
+            </div>
+        </div>
+    </div>
 
-<option>Maruti Swift</option>
-<option>Hyundai Creta</option>
-<option>Mahindra Scorpio</option>
-<option>Tata Nexon</option>
-<option>Kia Seltos</option>
-<option>Hyundai i20</option>
-<option>Maruti Baleno</option>
-<option>Toyota Fortuner</option>
-<option>Mahindra Thar</option>
-<option>Maruti Brezza</option>
-<option>Hyundai Venue</option>
-<option>Kia Sonet</option>
-<option>Tata Punch</option>
-<option>Renault Kwid</option>
-<option>Maruti WagonR</option>
-<option>Hyundai Verna</option>
-<option>Honda City</option>
-<option>Toyota Innova</option>
-<option>Mahindra XUV700</option>
-<option>Tata Harrier</option>
+    <script>
+        const carSelect = document.getElementById('selectedCar');
+        const pickupDate = document.getElementById('pickupDate');
+        const returnDate = document.getElementById('returnDate');
+        const bookingForm = document.getElementById('bookingForm');
+        const summaryPrice = document.getElementById('summaryPrice');
+        const summaryDays = document.getElementById('summaryDays');
+        const summarySubtotal = document.getElementById('summarySubtotal');
+        const summaryTotal = document.getElementById('summaryTotal');
+        const pricingError = document.getElementById('pricingError');
+        const summaryImage = document.getElementById('summaryImage');
+        const summaryCarName = document.getElementById('summaryCarName');
+        const summaryCategory = document.getElementById('summaryCategory');
+        const summaryCardPrice = document.getElementById('summaryCardPrice');
+        const summaryCardDays = document.getElementById('summaryCardDays');
+        const summaryCardTotal = document.getElementById('summaryCardTotal');
+        const summaryBookButton = document.getElementById('summaryBookButton');
 
-</select>
+        let carInventory = [];
+        const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-<!-- PICKUP DATE -->
+        function formatCurrency(amount) {
+            return '₹' + amount.toLocaleString('en-IN');
+        }
 
-<input
-type="date"
-id="pickupDate"
-required
->
+        function parsePrice(priceString) {
+            return parseInt(priceString.replace(/[^0-9]/g, ''), 10) || 0;
+        }
 
-<!-- DROP DATE -->
+        function getRentalDays(pickup, dropoff) {
+            if (!pickup || !dropoff) return 0;
+            const pickupTime = new Date(pickup).getTime();
+            const returnTime = new Date(dropoff).getTime();
+            if (returnTime < pickupTime) return -1;
+            return Math.floor((returnTime - pickupTime) / MS_PER_DAY) + 1;
+        }
 
-<input
-type="date"
-id="dropDate"
-required
->
+        function resetSummary() {
+            summaryPrice.textContent = '₹0';
+            summaryDays.textContent = '0';
+            summarySubtotal.textContent = '₹0';
+            summaryTotal.textContent = '₹0';
+            summaryCarName.textContent = 'Select a car to see details';
+            summaryCategory.textContent = 'Category';
+            summaryCardPrice.textContent = '₹0';
+            summaryCardDays.textContent = '0';
+            summaryCardTotal.textContent = '₹0';
+            summaryImage.src = 'car.png';
+            summaryImage.alt = 'Selected car image';
+        }
 
-<!-- PLACE -->
+        function updateSummary(selectedCar, days) {
+            if (!selectedCar || days <= 0) {
+                resetSummary();
+                return;
+            }
 
-<textarea
-id="place"
-rows="4"
-placeholder="Remark(other queries)"
-required
-></textarea>
+            const subtotal = selectedCar.price * days;
+            const grandTotal = subtotal;
 
-<!-- SUBMIT -->
+            summaryPrice.textContent = formatCurrency(selectedCar.price);
+            summaryDays.textContent = days;
+            summarySubtotal.textContent = formatCurrency(subtotal);
+            summaryTotal.textContent = formatCurrency(grandTotal);
+            summaryCarName.textContent = selectedCar.name;
+            summaryCategory.textContent = selectedCar.category;
+            summaryCardPrice.textContent = formatCurrency(selectedCar.price);
+            summaryCardDays.textContent = days;
+            summaryCardTotal.textContent = formatCurrency(grandTotal);
+            summaryImage.src = selectedCar.image;
+            summaryImage.alt = selectedCar.name;
+        }
 
-<button type="submit">
-Confirm Booking
-</button>
+        function getSelectedCar() {
+            return carInventory.find(car => car.name === carSelect.value);
+        }
 
-</form>
+        function refreshPricing() {
+            pricingError.textContent = '';
+            const selectedCar = getSelectedCar();
+            const days = getRentalDays(pickupDate.value, returnDate.value);
 
-</div>
+            if (!selectedCar) {
+                updateSummary(null, 0);
+                return;
+            }
 
-</section>
+            if (days === -1) {
+                pricingError.textContent = 'Return date cannot be earlier than pickup date.';
+                updateSummary(null, 0);
+                return;
+            }
 
-<!-- FOOTER -->
+            updateSummary(selectedCar, Math.max(days, 1));
+        }
 
-<footer>
+        async function loadCarInventory() {
+            try {
+                const response = await fetch('cars.html', { cache: 'no-store' });
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const cards = Array.from(doc.querySelectorAll('.car-card'));
 
-© 2026 AVS DRIVE | All Rights Reserved
+                carInventory = cards.map(card => {
+                    const name = card.querySelector('h3')?.textContent.trim() || '';
+                    const priceText = card.dataset.price || card.querySelector('.price')?.textContent || '';
+                    const category = card.dataset.category || card.querySelector('.car-category')?.textContent.trim() || 'Standard';
+                    const image = card.querySelector('.car-img-container img')?.src || 'car.png';
+                    return {
+                        name,
+                        price: parsePrice(priceText),
+                        category,
+                        image
+                    };
+                }).filter(car => car.name && car.price > 0);
 
-</footer>
+                carSelect.innerHTML = '<option value="">Choose your car</option>' +
+                    carInventory.map(car => `<option value="${car.name}">${car.name}</option>`).join('');
 
-<script>
+                const savedCar = localStorage.getItem('selectedCar');
+                if (savedCar && carInventory.some(car => car.name === savedCar)) {
+                    carSelect.value = savedCar;
+                    localStorage.removeItem('selectedCar');
+                }
 
-document.getElementById("bookingForm")
-.addEventListener("submit", function(e){
+                refreshPricing();
+            } catch (error) {
+                carSelect.innerHTML = '<option value="">Unable to load car list</option>';
+                pricingError.textContent = 'Unable to load car inventory. Please refresh the page.';
+                console.error('Car inventory load failed:', error);
+            }
+        }
 
-e.preventDefault();
+        function buildWhatsAppMessage() {
+            const selectedCar = getSelectedCar();
+            const pickupLocation = document.getElementById('pickupLocation').value.trim();
+            const customerName = document.getElementById('customerName').value.trim();
+            const customerPhone = document.getElementById('customerPhone').value.trim();
+            const customerEmail = document.getElementById('customerEmail').value.trim();
+            const pickup = pickupDate.value;
+            const dropoff = returnDate.value;
+            const days = getRentalDays(pickup, dropoff);
+            const total = selectedCar ? formatCurrency(selectedCar.price * Math.max(days, 1)) : '₹0';
 
-let name =
-document.getElementById("name").value;
+            return (
+                '*NEW CAR BOOKING REQUEST* 🚗\n\n' +
+                '*Name:* ' + customerName + '\n' +
+                '*Phone:* ' + customerPhone + '\n' +
+                '*Email:* ' + customerEmail + '\n' +
+                '*Pickup Location:* ' + pickupLocation + '\n\n' +
+                '*Selected Car:* ' + (selectedCar?.name || 'N/A') + '\n' +
+                '*Category:* ' + (selectedCar?.category || 'N/A') + '\n' +
+                '*Price Per Day:* ' + (selectedCar ? formatCurrency(selectedCar.price) : '₹0') + '\n' +
+                '*Rental Days:* ' + (days > 0 ? days : 'N/A') + '\n' +
+                '*Total Amount:* ' + total + '\n' +
+                '*Pickup Date:* ' + pickup + '\n' +
+                '*Return Date:* ' + dropoff + '\n\n' +
+                '_Sent via AVS DRIVE Booking Portal_'
+            );
+        }
 
-let mobile =
-document.getElementById("mobile").value;
+        bookingForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const selectedCar = getSelectedCar();
+            const days = getRentalDays(pickupDate.value, returnDate.value);
 
-let car =
-document.getElementById("carSelect").value;
+            if (!selectedCar) {
+                pricingError.textContent = 'Please choose a car from the list.';
+                return;
+            }
+            if (days === -1) {
+                pricingError.textContent = 'Return date cannot be earlier than pickup date.';
+                return;
+            }
+            if (!bookingForm.checkValidity()) {
+                bookingForm.reportValidity();
+                return;
+            }
 
-let pickupDate =
-document.getElementById("pickupDate").value;
+            const message = buildWhatsAppMessage();
+            const whatsappNumber = '919717490134';
+            const url = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(message);
+            window.open(url, '_blank');
+        });
 
-let dropDate =
-document.getElementById("dropDate").value;
+        summaryBookButton.addEventListener('click', function () {
+            if (typeof bookingForm.requestSubmit === 'function') {
+                bookingForm.requestSubmit();
+            } else {
+                bookingForm.dispatchEvent(new Event('submit', { cancelable: true }));
+            }
+        });
 
-let place =
-document.getElementById("place").value;
+        carSelect.addEventListener('change', refreshPricing);
+        pickupDate.addEventListener('change', refreshPricing);
+        returnDate.addEventListener('change', refreshPricing);
 
-let message = 
-"🚗 NEW CAR BOOKING REQUEST\n\n" +
-"👤 Name: " + name + "\n\n" +
-"📞 Mobile: " + mobile + "\n\n" +
-"🚘 Car: " + car + "\n\n" +
-"📅 Pickup Date: " + pickupDate + "\n\n" +
-"📅 Drop Date: " + dropDate + "\n\n" +
-"📍 Location: " + place;
+        document.addEventListener('DOMContentLoaded', loadCarInventory);
 
-let whatsappNumber = "919717490134";
+        function applyActivePageLinks() {
+            const pageMap = {
+                '': 'home',
+                'index.html': 'home',
+                'cars.html': 'cars',
+                'gallery.html': 'gallery',
+                'about.html': 'about',
+                'contact.html': 'contact'
+            };
+            const path = window.location.pathname.split('/').pop();
+            const currentPage = pageMap[path] || '';
 
-let url =
-"https://wa.me/" +
-whatsappNumber +
-"?text=" +
-encodeURIComponent(message);
+            document.querySelectorAll('nav a[data-page], .footer-column a[data-page]').forEach(link => {
+                link.classList.toggle('active-link', currentPage && link.dataset.page === currentPage);
+            });
+        }
 
-window.open(url, "_blank");
+        function bindFooterModalLinks() {
+            const aboutModalBackdrop = document.getElementById('aboutModalBackdrop');
+            const aboutModalClose = document.getElementById('aboutModalClose');
 
-});
+            document.querySelectorAll('a[data-modal="about"]').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    showAboutModal();
+                });
+            });
 
-</script>
+            aboutModalClose.addEventListener('click', hideAboutModal);
+            aboutModalBackdrop.addEventListener('click', function(event) {
+                if (event.target === aboutModalBackdrop) {
+                    hideAboutModal();
+                }
+            });
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && aboutModalBackdrop.classList.contains('visible')) {
+                    hideAboutModal();
+                }
+            });
+        }
+
+        async function loadAboutSectionHtml() {
+            const existingAbout = document.querySelector('.about');
+            if (existingAbout) {
+                return existingAbout.outerHTML;
+            }
+
+            try {
+                const response = await fetch('index.html', { cache: 'no-store' });
+                if (!response.ok) throw new Error('Unable to fetch homepage content');
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const section = doc.querySelector('.about');
+                if (section) {
+                    return section.outerHTML;
+                }
+            } catch (error) {
+                console.warn('About section could not be loaded dynamically:', error);
+            }
+
+            return null;
+        }
+
+        async function showAboutModal() {
+            const modalContent = document.getElementById('aboutModalContent');
+            const loadedHtml = await loadAboutSectionHtml();
+
+            if (loadedHtml) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(loadedHtml, 'text/html');
+                const aboutSection = doc.querySelector('.about');
+
+                if (aboutSection) {
+                    const aboutText = aboutSection.querySelector('.about-text');
+                    const aboutImg = aboutSection.querySelector('.about-img');
+
+                    if (aboutText && aboutImg) {
+                        modalContent.innerHTML = '';
+                        const left = document.createElement('div');
+                        left.className = 'modal-left';
+                        left.appendChild(aboutText.cloneNode(true));
+
+                        const right = document.createElement('div');
+                        right.className = 'modal-image';
+                        const img = aboutImg.querySelector('img');
+                        if (img) {
+                            const cloneImg = img.cloneNode(true);
+                            cloneImg.style.width = '100%';
+                            cloneImg.style.borderRadius = '24px';
+                            right.appendChild(cloneImg);
+                        }
+
+                        modalContent.appendChild(left);
+                        modalContent.appendChild(right);
+                    }
+                }
+            }
+
+            const aboutModalBackdrop = document.getElementById('aboutModalBackdrop');
+            aboutModalBackdrop.classList.add('visible');
+            aboutModalBackdrop.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideAboutModal() {
+            const aboutModalBackdrop = document.getElementById('aboutModalBackdrop');
+            aboutModalBackdrop.classList.remove('visible');
+            aboutModalBackdrop.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        bindFooterModalLinks();
+        applyActivePageLinks();
+    </script>
 </body>
 </html>
